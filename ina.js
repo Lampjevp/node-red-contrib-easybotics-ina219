@@ -51,6 +51,7 @@ module.exports = function(RED)
 		
 		const node = this 
 		//the config state for this sensor 
+		node.bus	= parseInt(config.bus)
 		node.address = parseInt(config.address)
 		node.delay   = parseInt(config.delay)
 		node.ohms	 = parseFloat(config.ohms)
@@ -88,13 +89,13 @@ module.exports = function(RED)
 			}
 
 
-			ina219.init(node.address, 1)
+			ina219.init(node.address, node.bus)
 			try 
 			{
-				console.log(node.ohms)
-				console.log(node.customResistor)
+//				console.log(node.ohms)
+//				console.log(node.customResistor)
 
-				console.log("initing!")
+//				console.log("initing!")
 				if(node.customResistor) ina219.calibrate32V2AResistor(node.ohms, loop)
 				else ina219.calibrate32V2A(loop)
 			}
